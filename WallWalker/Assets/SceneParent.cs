@@ -44,4 +44,9 @@ public class SceneParent : MonoBehaviour {
             }
         }
     }
+
+    public int GetCurrentStateIndex()
+    {
+        return m_toStateIndex;
+    }
 }

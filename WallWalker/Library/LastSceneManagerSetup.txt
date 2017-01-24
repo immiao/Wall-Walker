@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/level0.unity
+- path: Assets/VV TexturePack/Scene/Samples.unity
   isLoaded: 1
   isActive: 1
