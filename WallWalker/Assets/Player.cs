@@ -12,10 +12,11 @@ public class Player : MonoBehaviour {
     private Transform m_cameraPos;
     private Vector3 m_axis;
     private StarText m_starText;
+    private AudioSource m_audioSource;
     public int m_nextLevel;
-
     // Use this for initialization
     void Start() {
+        m_audioSource = GetComponent<AudioSource>();
         m_starText = GameObject.Find("StarTextObject").GetComponent<StarText>();
         m_cameraPos = GameObject.Find("Main Camera").GetComponent<Transform>();
         m_rigidBody = GetComponent<Rigidbody>();
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour {
         m_isFailed = false;
         m_axis = new Vector3(1, 1, 1) * 10;
         Time.timeScale = 1.0f;
+
     }
     public void UseGravity(bool b)
     {
@@ -53,7 +55,7 @@ public class Player : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         Collider collider = collision.collider;
-        if (collider.CompareTag("door"))
+        if (collider.CompareTag("door") && m_starText.GetStarCounter() == m_starText.m_total)
             m_isSucceeded = true;
     }
 
@@ -63,6 +65,7 @@ public class Player : MonoBehaviour {
         {
             m_starText.IncStarCounter();
             other.gameObject.SetActive(false);
+            m_audioSource.Play();
         }
     }
     void OnGUI()
@@ -81,7 +84,7 @@ public class Player : MonoBehaviour {
 
             GUI.Label(new Rect(0, Screen.height / 2 - 100, Screen.width, 25), "CONGRATULATION!");
             Time.timeScale = 0.0f;
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, 3 * Screen.height / 7, Screen.width / 4, 60), "Next Level"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 150, 3 * Screen.height / 7, Screen.width / 4, 60), "Next Level"))
             {
                 if (m_nextLevel != -1)
                     SceneManager.LoadScene(m_nextLevel);

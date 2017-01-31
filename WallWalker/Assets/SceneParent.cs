@@ -22,13 +22,13 @@ public class SceneParent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		if (Input.GetKeyDown(KeyCode.LeftArrow) && !m_isRotating)
         {
             m_isRotating = true;
             m_fromStateIndex = m_toStateIndex;
             m_toStateIndex = (m_toStateIndex + 1) % 3;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && !m_isRotating)
         {
             m_isRotating = true;
             m_fromStateIndex = m_toStateIndex;

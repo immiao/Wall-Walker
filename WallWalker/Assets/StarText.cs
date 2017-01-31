@@ -12,7 +12,10 @@ public class StarText : MonoBehaviour {
         m_text = GetComponent<Text>();
         m_starCounter = 0;
 	}
-	
+	public int GetStarCounter()
+    {
+        return m_starCounter;
+    }
     public void IncStarCounter()
     {
         m_starCounter++;
